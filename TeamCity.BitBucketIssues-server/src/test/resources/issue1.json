@@ -1,0 +1,40 @@
+{
+  "status": "resolved",
+  "priority": "major",
+  "title": "HttpClient support for Stash client",
+  "reported_by": {
+    "username": "czawadka-atlassian",
+    "first_name": "Cezary",
+    "last_name": "Zawadka",
+    "display_name": "Cezary Zawadka",
+    "is_staff": false,
+    "avatar": "https://bitbucket.org/account/czawadka-atlassian/avatar/32/?ts=1458042649",
+    "resource_uri": "/1.0/users/czawadka-atlassian",
+    "is_team": false
+  },
+  "utc_last_updated": "2014-04-02 14:58:40+00:00",
+  "responsible": {
+    "username": "czawadka-atlassian",
+    "first_name": "Cezary",
+    "last_name": "Zawadka",
+    "display_name": "Cezary Zawadka",
+    "is_staff": false,
+    "avatar": "https://bitbucket.org/account/czawadka-atlassian/avatar/32/?ts=1458042649",
+    "resource_uri": "/1.0/users/czawadka-atlassian",
+    "is_team": false
+  },
+  "created_on": "2014-03-25T15:51:43.963",
+  "metadata": {
+    "kind": "enhancement",
+    "version": null,
+    "component": null,
+    "milestone": null
+  },
+  "content": "Stash Java client currently supports Application Links only. Add implementation which uses Apache HttpClient to make possible to use it outside AppLink/plugin context",
+  "comment_count": 1,
+  "local_id": 1,
+  "follower_count": 1,
+  "utc_created_on": "2014-03-25 14:51:43+00:00",
+  "resource_uri": "/1.0/repositories/atlassianlabs/stash-java-client/issues/1",
+  "is_spam": false
+}

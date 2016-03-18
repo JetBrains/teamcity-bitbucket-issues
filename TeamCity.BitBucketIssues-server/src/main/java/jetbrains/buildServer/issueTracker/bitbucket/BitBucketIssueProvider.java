@@ -1,5 +1,6 @@
 package jetbrains.buildServer.issueTracker.bitbucket;
 
+import com.intellij.openapi.diagnostic.Logger;
 import jetbrains.buildServer.issueTracker.AbstractIssueProvider;
 import jetbrains.buildServer.issueTracker.IssueFetcher;
 import jetbrains.buildServer.issueTracker.IssueFetcherAuthenticator;
@@ -28,6 +29,11 @@ import static jetbrains.buildServer.issueTracker.bitbucket.BitBucketConstants.*;
  */
 public class BitBucketIssueProvider extends AbstractIssueProvider {
 
+  private static final Pattern FULL_HOST_PATTERN = Pattern.compile("^https://(.+)/([^/]+)/([^/]+)/?$");
+
+  private static final Pattern OWNER_AND_REPO_PATTERN = Pattern.compile("^/?([^/])/([^/])/?$");
+
+  private static final Logger LOG = Logger.getInstance(BitBucketIssueProvider.class.getName());
 
   public BitBucketIssueProvider(@NotNull String type, @NotNull IssueFetcher fetcher) {
     super(type, fetcher);
@@ -42,8 +48,37 @@ public class BitBucketIssueProvider extends AbstractIssueProvider {
   @Override
   public void setProperties(@NotNull Map<String, String> map) {
     super.setProperties(map);
-    myHost = map.get(PARAM_REPOSITORY);
-    myFetchHost = myHost;
+    // host - http endpoint for browser
+    // fetch host - http endpoint for rest api
+    final URL htmlUrl = getFullUrl(map);
+    if (htmlUrl != null) {
+      myHost = sanitizeHost(htmlUrl.toString());
+      final Matcher m = FULL_HOST_PATTERN.matcher(myHost);
+      myFetchHost = getAPIUrl(htmlUrl, m.group(2), m.group(3));
+    }
+  }
+
+  private String getAPIUrl(@NotNull final URL htmlUrl, @NotNull final String owner, @NotNull final String repo) {
+    try {
+      return new URL("https", "api." + htmlUrl.getHost(), "1.0/repositories/" + owner + "/" + repo + "/issues/").toString();
+    } catch (MalformedURLException e) {
+      LOG.warn(e);
+    }
+    return null;
+  }
+
+  private static URL getFullUrl(@NotNull final Map<String, String> properties) {
+    String result = properties.get(PARAM_REPOSITORY);
+    final Matcher matcher = OWNER_AND_REPO_PATTERN.matcher(result);
+    if (matcher.matches()) {
+      result = "https://bitbucket.org/" + matcher.group(1) + "/" + matcher.group(2);
+    }
+    try {
+      return new URL(result);
+    } catch(MalformedURLException e) {
+      LOG.warn(e);
+    }
+    return null;
   }
 
   @NotNull
@@ -93,11 +128,9 @@ public class BitBucketIssueProvider extends AbstractIssueProvider {
         }
 
         if (checkNotEmptyParam(result, map, PARAM_REPOSITORY, "Repository must be specified")) {
-          String repo = map.get(PARAM_REPOSITORY);
-          try {
-            new URL(repo);
-          } catch (MalformedURLException e) {
-            result.add(new InvalidProperty(PARAM_REPOSITORY, "Repository URL is not correct"));
+          URL url = getFullUrl(map);
+          if (url == null) {
+            result.add(new InvalidProperty(PARAM_REPOSITORY, "Either a valid URL or owner/repo must be specified"));
           }
         }
       }

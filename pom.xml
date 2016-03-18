@@ -51,7 +51,7 @@
           <plugin>
             <groupId>org.jetbrains.teamcity</groupId>
             <artifactId>teamcity-sdk-maven-plugin</artifactId>
-            <version>0.3-SNAPSHOT</version>
+            <version>0.4-SNAPSHOT</version>
             <configuration>
               <teamcityDir>${dev.teamcity.dir}</teamcityDir>
               <dataDirectory>${dev.teamcity.data.path}</dataDirectory>

@@ -4,12 +4,11 @@ import jetbrains.buildServer.issueTracker.AbstractIssueFetcher;
 import jetbrains.buildServer.issueTracker.IssueData;
 import jetbrains.buildServer.util.cache.EhCacheHelper;
 import org.apache.commons.httpclient.Credentials;
+import org.apache.commons.io.IOUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,40 +19,27 @@ import java.util.regex.Pattern;
  */
 public class BitBucketIssueFetcher extends AbstractIssueFetcher {
 
-  private final Pattern ownerAndRepoPattern = Pattern.compile("/?([^/]+)/([^/]+)/?$");
+  @NotNull
+  private final IssueParser myParser;
 
-  public BitBucketIssueFetcher(@NotNull EhCacheHelper cacheHelper) {
+  public BitBucketIssueFetcher(@NotNull final EhCacheHelper cacheHelper,
+                               @NotNull final IssueParser parser) {
     super(cacheHelper);
+    myParser = parser;
   }
 
   @NotNull
   @Override
   public IssueData getIssue(@NotNull String host, @NotNull String id, @Nullable Credentials credentials) throws Exception {
-    final String issueURL = getUrl(host, id);
+    //here host == sanitized fetchHost
     final String issueId = getIssueId(id);
-    URL url;
-    try {
-      url = new URL(host);
-      final Matcher m = ownerAndRepoPattern.matcher(url.getPath());
-      if (!m.matches()) {
-        throw new IllegalArgumentException("URL + [" + url.toString() + "] does not contain myOwner and repository info");
-      }
-      return getFromCacheOrFetch(issueURL, new FetchFunction() {
-        @NotNull
-        public IssueData fetch() throws Exception {
-          InputStream body = fetchHttpFile(host, credentials);
-          return doGetIssue(body, url);
-        }
-      });
-    } catch (MalformedURLException e) {
-      throw new RuntimeException(e);
-    }
+    final String issueURL = host + issueId;
+    System.out.println(issueURL);
+    return getFromCacheOrFetch(issueURL, () -> {
+      InputStream body = fetchHttpFile(issueURL, credentials);
+      return myParser.parse(IOUtils.toString(body, "UTF-8"));
+    });
   }
-
-  private IssueData doGetIssue(InputStream body, URL url) {
-    return null;
-  }
-
 
   private String getIssueId(@NotNull final String idString) {
     final Matcher matcher = myPattern.matcher(idString);
@@ -66,8 +52,8 @@ public class BitBucketIssueFetcher extends AbstractIssueFetcher {
 
   @NotNull
   @Override
-  public String getUrl(@NotNull String host, @NotNull String id) {
-    return String.format("%s/issues/%s", host, getIssueId(id));
+  public String getUrl(@NotNull String host, @NotNull String issueId) {
+    return String.format("%sissues/%s", host, issueId);
   }
 
   private Pattern myPattern;
@@ -75,6 +61,5 @@ public class BitBucketIssueFetcher extends AbstractIssueFetcher {
   public void setPattern(final Pattern pattern) {
     myPattern = pattern;
   }
-
 
 }
