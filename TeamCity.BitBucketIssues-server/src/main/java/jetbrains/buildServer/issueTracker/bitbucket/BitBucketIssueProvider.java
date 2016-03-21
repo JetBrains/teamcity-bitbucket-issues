@@ -7,6 +7,7 @@ import jetbrains.buildServer.issueTracker.IssueFetcherAuthenticator;
 import jetbrains.buildServer.issueTracker.bitbucket.auth.BitBucketAuthenticator;
 import jetbrains.buildServer.serverSide.InvalidProperty;
 import jetbrains.buildServer.serverSide.PropertiesProcessor;
+import jetbrains.buildServer.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.MalformedURLException;
@@ -31,7 +32,7 @@ public class BitBucketIssueProvider extends AbstractIssueProvider {
 
   private static final Pattern FULL_HOST_PATTERN = Pattern.compile("^https://(.+)/([^/]+)/([^/]+)/?$");
 
-  private static final Pattern OWNER_AND_REPO_PATTERN = Pattern.compile("^/?([^/])/([^/])/?$");
+  private static final Pattern OWNER_AND_REPO_PATTERN = Pattern.compile("^/?([^/]+)/([^/]+)/?$");
 
   private static final Logger LOG = Logger.getInstance(BitBucketIssueProvider.class.getName());
 
@@ -54,13 +55,15 @@ public class BitBucketIssueProvider extends AbstractIssueProvider {
     if (htmlUrl != null) {
       myHost = sanitizeHost(htmlUrl.toString());
       final Matcher m = FULL_HOST_PATTERN.matcher(myHost);
-      myFetchHost = getAPIUrl(htmlUrl, m.group(2), m.group(3));
+      if (m.matches()) {
+        myFetchHost = getAPIUrl(htmlUrl, m.group(2), StringUtil.removeSuffix(m.group(3), ".git", false));
+      }
     }
   }
 
   private String getAPIUrl(@NotNull final URL htmlUrl, @NotNull final String owner, @NotNull final String repo) {
     try {
-      return new URL("https", "api." + htmlUrl.getHost(), "1.0/repositories/" + owner + "/" + repo + "/issues/").toString();
+      return new URL("https", "api." + htmlUrl.getHost(), "/1.0/repositories/" + owner + "/" + repo + "/issues/").toString();
     } catch (MalformedURLException e) {
       LOG.warn(e);
     }
@@ -148,8 +151,4 @@ public class BitBucketIssueProvider extends AbstractIssueProvider {
       return true;
     }
   };
-
-
-
-
 }
