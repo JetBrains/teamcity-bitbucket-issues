@@ -34,7 +34,6 @@ public class BitBucketIssueFetcher extends AbstractIssueFetcher {
     //here host == sanitized fetchHost
     final String issueId = getIssueId(id);
     final String issueURL = host + issueId;
-    System.out.println(issueURL);
     return getFromCacheOrFetch(issueURL, () -> {
       InputStream body = fetchHttpFile(issueURL, credentials);
       return myParser.parse(IOUtils.toString(body, "UTF-8"));
