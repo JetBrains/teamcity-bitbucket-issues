@@ -44,7 +44,49 @@
       <artifactId>jackson-databind</artifactId>
       <version>2.1.0</version>
     </dependency>
-
-
   </dependencies>
+
+  <profiles>
+    <profile>
+      <id>TeamCity</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>env.TEAMCITY_VERSION</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <suiteXmlFiles>
+                <file>src/test/resources/tests.teamcity.xml</file>
+              </suiteXmlFiles>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>Local Build</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <suiteXmlFiles>
+                <file>src/test/resources/tests.local.xml</file>
+              </suiteXmlFiles>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

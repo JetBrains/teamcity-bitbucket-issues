@@ -1,7 +1,6 @@
 package jetbrains.buildServer.issueTracker.bitbucket;
 
 import jetbrains.buildServer.BaseTestCase;
-import jetbrains.buildServer.issueTracker.IssueData;
 import jetbrains.buildServer.issueTracker.errors.NotFoundException;
 import jetbrains.buildServer.serverSide.BuildServerListener;
 import jetbrains.buildServer.serverSide.ServerPaths;
@@ -9,6 +8,7 @@ import jetbrains.buildServer.util.EventDispatcher;
 import jetbrains.buildServer.util.cache.EhCacheHelper;
 import jetbrains.buildServer.util.cache.EhCacheUtil;
 import jetbrains.buildServer.util.cache.ResetCacheRegisterImpl;
+import org.jetbrains.annotations.NotNull;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -42,15 +42,15 @@ public class BitBucketIssueFetcherTest extends BaseTestCase {
 
   @Test
   public void testGetIssueAnonymously() throws Exception {
-    IssueData data = myFetcher.getIssue("https://api.bitbucket.org/1.0/repositories/atlassianlabs/stash-java-client/issues/", "#2", null);
-    assertNotNull(data);
-    System.out.println(data.toString());
+    myFetcher.getIssue(getUrl(owner, repo), "#2", null);
   }
 
   @Test(expectedExceptions = NotFoundException.class)
   public void testGetIssueAnonymously_IssueNotFound() throws Exception {
-    IssueData data = myFetcher.getIssue("https://api.bitbucket.org/1.0/repositories/atlassianlabs/stash-java-client/issues/", "#10000", null);
-    assertNotNull(data);
-    System.out.println(data.toString());
+    myFetcher.getIssue(getUrl(owner, repo), "#100000", null);
+  }
+
+  private String getUrl(@NotNull final String owner, @NotNull final String repo) {
+    return String.format("https://api.bitbucket.org/1.0/repositories/%s/%s/issues/", owner, repo);
   }
 }

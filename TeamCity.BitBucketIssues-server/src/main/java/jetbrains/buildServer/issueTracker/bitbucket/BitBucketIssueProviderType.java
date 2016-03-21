@@ -41,7 +41,7 @@ public class BitBucketIssueProviderType extends IssueProviderType {
   @NotNull
   @Override
   public String getDisplayName() {
-    return "BitBucket";
+    return "Bitbucket";
   }
 
   @NotNull

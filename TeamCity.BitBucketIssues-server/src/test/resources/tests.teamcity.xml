@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TeamCity.BitBucketIssues Local Suite">
+  <test name="Unit Tests">
+    <classes>
+      <class name="jetbrains.buildServer.issueTracker.bitbucket.BitBucketAuthenticatorTest"/>
+      <class name="jetbrains.buildServer.issueTracker.bitbucket.BitBucketIssueProviderTest"/>
+      <class name="jetbrains.buildServer.issueTracker.bitbucket.IssueParserTest"/>
+    </classes>
+  </test>
+</suite>

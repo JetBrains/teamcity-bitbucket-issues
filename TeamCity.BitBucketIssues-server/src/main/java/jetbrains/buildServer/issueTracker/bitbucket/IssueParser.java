@@ -28,7 +28,7 @@ public class IssueParser {
                 + issueAsString.substring(Math.min(100, issueAsString.length() - 1))
                 + "]");
       }
-      throw e;
+      throw new RuntimeException(e);
     }
   }
 

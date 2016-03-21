@@ -1,0 +1,23 @@
+{
+  "status": "in progress",
+  "priority": "major",
+  "title": "Very nasty bug",
+  "reported_by": {
+    "username": "customer"
+  },
+  "utc_last_updated": "2014-04-02 14:58:40+00:00",
+  "responsible": {
+    "username": "orybak"
+  },
+  "created_on": "2014-03-25T15:51:43.963",
+  "metadata": {
+    "kind": "bug"
+  },
+  "content": "This bug pisses me off",
+  "comment_count": 1,
+  "local_id": 1,
+  "follower_count": 1,
+  "utc_created_on": "2014-03-25 14:51:43+00:00",
+  "resource_uri": "/1.0/repositories/owner/repo/issues/1",
+  "is_spam": false
+}

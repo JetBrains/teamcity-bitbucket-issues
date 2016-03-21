@@ -22,7 +22,7 @@ public class BitBucketAuthenticator implements IssueFetcherAuthenticator {
 
   public BitBucketAuthenticator(@NotNull final Map<String, String > properties) {
     final String authType = properties.get(PARAM_AUTH_TYPE);
-    if (AUTH_LOGINPASSWORD.equals(authType)) {
+    if (AUTH_LOGIN_PASSWORD.equals(authType)) {
       final String username = properties.get(PARAM_USERNAME);
       final String password = properties.get(PARAM_PASSWORD);
       myCredentials = new UsernamePasswordCredentials(username, password);

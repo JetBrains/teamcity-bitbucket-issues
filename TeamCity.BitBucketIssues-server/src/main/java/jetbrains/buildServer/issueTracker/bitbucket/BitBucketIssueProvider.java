@@ -9,6 +9,7 @@ import jetbrains.buildServer.serverSide.InvalidProperty;
 import jetbrains.buildServer.serverSide.PropertiesProcessor;
 import jetbrains.buildServer.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -54,6 +55,7 @@ public class BitBucketIssueProvider extends AbstractIssueProvider {
     final URL htmlUrl = getFullUrl(map);
     if (htmlUrl != null) {
       myHost = sanitizeHost(htmlUrl.toString());
+      myProperties.put("host", myHost);
       final Matcher m = FULL_HOST_PATTERN.matcher(myHost);
       if (m.matches()) {
         myFetchHost = getAPIUrl(htmlUrl, m.group(2), StringUtil.removeSuffix(m.group(3), ".git", false));
@@ -61,6 +63,7 @@ public class BitBucketIssueProvider extends AbstractIssueProvider {
     }
   }
 
+  @Nullable
   private String getAPIUrl(@NotNull final URL htmlUrl, @NotNull final String owner, @NotNull final String repo) {
     try {
       return new URL("https", "api." + htmlUrl.getHost(), "/1.0/repositories/" + owner + "/" + repo + "/issues/").toString();
@@ -70,6 +73,7 @@ public class BitBucketIssueProvider extends AbstractIssueProvider {
     return null;
   }
 
+  @Nullable
   private static URL getFullUrl(@NotNull final Map<String, String> properties) {
     String result = properties.get(PARAM_REPOSITORY);
     final Matcher matcher = OWNER_AND_REPO_PATTERN.matcher(result);
@@ -116,7 +120,7 @@ public class BitBucketIssueProvider extends AbstractIssueProvider {
       if (checkNotEmptyParam(result, map, PARAM_AUTH_TYPE, "Authentication type must be specified")) {
         // we have auth type. check against it
         final String authTypeParam = map.get(PARAM_AUTH_TYPE);
-        if (authTypeParam.equals(AUTH_LOGINPASSWORD)) {
+        if (authTypeParam.equals(AUTH_LOGIN_PASSWORD)) {
           checkNotEmptyParam(result, map, PARAM_USERNAME, "Username must be specified");
           checkNotEmptyParam(result, map, PARAM_PASSWORD, "Password must be specified");
         }

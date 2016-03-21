@@ -10,6 +10,6 @@
 <c:set var="pattern" value="<%=BitBucketConstants.PARAM_PATTERN%>"/>
 
 <c:set var="authAnonymous" value="<%=BitBucketConstants.AUTH_ANONYMOUS%>"/>
-<c:set var="authLoginPassword" value="<%=BitBucketConstants.AUTH_LOGINPASSWORD%>"/>
+<c:set var="authLoginPassword" value="<%=BitBucketConstants.AUTH_LOGIN_PASSWORD%>"/>
 
 
