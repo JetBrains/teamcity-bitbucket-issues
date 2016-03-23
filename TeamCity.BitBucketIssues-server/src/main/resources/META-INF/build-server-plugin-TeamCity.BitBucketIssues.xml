@@ -8,5 +8,6 @@
   <bean class="jetbrains.buildServer.issueTracker.bitbucket.BitBucketIssueFetcher"/>
   <bean class="jetbrains.buildServer.issueTracker.bitbucket.BitBucketIssueProviderFactory"/>
   <bean class="jetbrains.buildServer.issueTracker.bitbucket.IssueParser"/>
+  <bean class="jetbrains.buildServer.issueTracker.bitbucket.health.IssueTrackerSuggestion"/>
 
 </beans>

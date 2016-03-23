@@ -5,6 +5,7 @@
       <class name="jetbrains.buildServer.issueTracker.bitbucket.BitBucketAuthenticatorTest"/>
       <class name="jetbrains.buildServer.issueTracker.bitbucket.BitBucketIssueProviderTest"/>
       <class name="jetbrains.buildServer.issueTracker.bitbucket.IssueParserTest"/>
+      <class name="jetbrains.buildServer.issueTracker.bitbucket.SuggestionsTest"/>
     </classes>
   </test>
 </suite>
