@@ -31,7 +31,7 @@ public class BitBucketAuthenticator implements IssueFetcherAuthenticator {
 
   @Override
   public boolean isBasicAuth() {
-    return false;
+    return true;
   }
 
   @Override

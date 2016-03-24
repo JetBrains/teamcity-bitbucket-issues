@@ -107,6 +107,11 @@ public class BitBucketIssueProvider extends AbstractIssueProvider {
     }
   }
 
+  @Override
+  protected final String getIssueViewUrl(@NotNull final String id) {
+    return myHost + "issues/" + id;
+  }
+
   @NotNull
   @Override
   public PropertiesProcessor getPropertiesProcessor() {

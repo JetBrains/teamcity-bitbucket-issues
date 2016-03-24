@@ -52,7 +52,7 @@ public class BitBucketIssueFetcher extends AbstractIssueFetcher {
   @NotNull
   @Override
   public String getUrl(@NotNull String host, @NotNull String issueId) {
-    return String.format("%sissues/%s", host, issueId);
+    return host + issueId;
   }
 
   private Pattern myPattern;
