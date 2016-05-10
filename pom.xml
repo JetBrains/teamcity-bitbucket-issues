@@ -10,15 +10,15 @@
   </properties>
   <repositories>
     <repository>
-        <id>JetBrains</id>
-        <url>http://repository.jetbrains.com/all</url>
+      <id>jetbrains-all</id>
+      <url>http://download.jetbrains.com/teamcity-repository</url>
     </repository>
   </repositories>
   <pluginRepositories>
-      <pluginRepository>
-          <id>JetBrains</id>
-          <url>http://repository.jetbrains.com/all</url>
-      </pluginRepository>
+    <pluginRepository>
+      <id>jetbrains-all</id>
+      <url>http://download.jetbrains.com/teamcity-repository</url>
+    </pluginRepository>
   </pluginRepositories>
   <build>
     <pluginManagement>
@@ -49,7 +49,7 @@
         <dev.teamcity.dir>W:\dist\tc_for_plugins</dev.teamcity.dir>
         <dev.teamcity.data.path>w:\dist\PluginDev.Data.BitBucketIssues</dev.teamcity.data.path>
         <dev.teamcity.version>10.0 EAP</dev.teamcity.version>
-        <dev.teamcity.start.agent>true</dev.teamcity.start.agent>
+        <dev.teamcity.start.agent>false</dev.teamcity.start.agent>
       </properties>
       <build>
         <plugins>
