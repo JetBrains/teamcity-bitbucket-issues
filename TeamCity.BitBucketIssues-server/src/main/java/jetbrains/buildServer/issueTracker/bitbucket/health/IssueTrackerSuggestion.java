@@ -128,7 +128,9 @@ public class IssueTrackerSuggestion extends ProjectSuggestion {
           return null;
         }
       } catch (URISyntaxException e) {
-        LOG.warn("Could not extract Bitbucket issue tracker suggestion from fetch URL: [" + fetchUrl + "]");
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Could not extract Bitbucket issue tracker suggestion from fetch URL: [" + fetchUrl + "]");
+        }
         return null;
       }
     }
