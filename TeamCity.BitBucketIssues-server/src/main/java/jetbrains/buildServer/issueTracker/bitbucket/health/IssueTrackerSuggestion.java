@@ -62,7 +62,7 @@ public class IssueTrackerSuggestion extends ProjectSuggestion {
   @Override
   public List<ProjectSuggestedItem> getSuggestions(@NotNull final SProject project) {
     final String type = myType.getType();
-    boolean alreadyUsed = myIssueProvidersManager.getProviders(project).values()
+    boolean alreadyUsed = myIssueProvidersManager.getOwnProviders(project).values()
             .stream().anyMatch(it -> it.getType().equals(type));
     final List<ProjectSuggestedItem> result = new ArrayList<>();
     if (!alreadyUsed) {
