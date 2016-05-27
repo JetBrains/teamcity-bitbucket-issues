@@ -72,8 +72,8 @@ public class SuggestionsTest extends BaseTestCase {
       oneOf(bitbucketProvider).getType();
       will(returnValue(myType.getType()));
 
-      oneOf(myManager).getOwnProviders(myProject);
-      will(returnValue(Collections.singletonMap("provider_id", bitbucketProvider)));
+      oneOf(myManager).getProviders(myProject);
+      will(returnValue(Collections.singletonList(bitbucketProvider)));
     }});
     assertEmpty(mySuggestion.getSuggestions(myProject));
     m.assertIsSatisfied();
@@ -82,8 +82,8 @@ public class SuggestionsTest extends BaseTestCase {
   @Test
   public void testNoVcsRoots() {
     m.checking(new Expectations() {{
-      oneOf(myManager).getOwnProviders(myProject);
-      will(returnValue(Collections.emptyMap()));
+      oneOf(myManager).getProviders(myProject);
+      will(returnValue(Collections.emptyList()));
 
       oneOf(myBuildType).getVcsRoots();
       will(returnValue(Collections.emptyList()));
@@ -99,8 +99,8 @@ public class SuggestionsTest extends BaseTestCase {
       oneOf(provider).getType();
       will(returnValue("some_other_type"));
 
-      oneOf(myManager).getOwnProviders(myProject);
-      will(returnValue(Collections.singletonMap("provider_id", provider)));
+      oneOf(myManager).getProviders(myProject);
+      will(returnValue(Collections.singletonList(provider)));
 
       oneOf(myBuildType).getVcsRoots();
       will(returnValue(Collections.emptyList()));
@@ -171,8 +171,8 @@ public class SuggestionsTest extends BaseTestCase {
     final VcsRootInstance i2 = m.mock(VcsRootInstance.class, "instance-2");
 
     m.checking(new Expectations() {{
-      oneOf(myManager).getOwnProviders(myProject);
-      will(returnValue(Collections.emptyMap()));
+      oneOf(myManager).getProviders(myProject);
+      will(returnValue(Collections.emptyList()));
 
       oneOf(myBuildType).getVcsRoots();
       will(returnValue(Arrays.asList(vcsParamRoot, vcsRealRoot)));
@@ -219,8 +219,8 @@ public class SuggestionsTest extends BaseTestCase {
     repoUrls.entrySet().stream().forEach(entry -> vcsRoots.put(entry.getKey(), m.mock(VcsRoot.class, "vcsroot-" + entry.getKey())));
 
     m.checking(new Expectations() {{
-      oneOf(myManager).getOwnProviders(myProject);
-      will(returnValue(Collections.emptyMap()));
+      oneOf(myManager).getProviders(myProject);
+      will(returnValue(Collections.emptyList()));
 
       oneOf(myBuildType).getVcsRoots();
       will(returnValue(new ArrayList<>(vcsRoots.values())));
