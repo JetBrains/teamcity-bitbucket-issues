@@ -5,6 +5,7 @@ import jetbrains.buildServer.issueTracker.AbstractIssueProvider;
 import jetbrains.buildServer.issueTracker.IssueFetcher;
 import jetbrains.buildServer.issueTracker.IssueFetcherAuthenticator;
 import jetbrains.buildServer.issueTracker.bitbucket.auth.BitBucketAuthenticator;
+import jetbrains.buildServer.log.Loggers;
 import jetbrains.buildServer.serverSide.InvalidProperty;
 import jetbrains.buildServer.serverSide.PropertiesProcessor;
 import jetbrains.buildServer.util.StringUtil;
@@ -35,7 +36,7 @@ public class BitBucketIssueProvider extends AbstractIssueProvider {
 
   private static final Pattern OWNER_AND_REPO_PATTERN = Pattern.compile("^/?([^/]+)/([^/]+)/?$");
 
-  private static final Logger LOG = Logger.getInstance(BitBucketIssueProvider.class.getName());
+  private static final Logger LOG = Loggers.ISSUE_TRACKERS;
 
   public BitBucketIssueProvider(@NotNull String type, @NotNull IssueFetcher fetcher) {
     super(type, fetcher);
