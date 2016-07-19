@@ -32,7 +32,7 @@ public class BitBucketIssueFetcherTest extends BaseTestCase {
   @BeforeMethod
   public void setUp() throws Exception {
     super.setUp();
-    final EhCacheHelper helper = new EhCacheUtil(new ServerPaths(createTempDir().getAbsolutePath()),
+    final EhCacheUtil helper = new EhCacheUtil(new ServerPaths(createTempDir().getAbsolutePath()),
             EventDispatcher.create(BuildServerListener.class),
             new ResetCacheRegisterImpl());
 

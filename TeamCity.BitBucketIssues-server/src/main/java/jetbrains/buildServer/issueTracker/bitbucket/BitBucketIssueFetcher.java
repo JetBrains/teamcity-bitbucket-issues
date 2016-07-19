@@ -3,6 +3,7 @@ package jetbrains.buildServer.issueTracker.bitbucket;
 import jetbrains.buildServer.issueTracker.AbstractIssueFetcher;
 import jetbrains.buildServer.issueTracker.IssueData;
 import jetbrains.buildServer.util.cache.EhCacheHelper;
+import jetbrains.buildServer.util.cache.EhCacheUtil;
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.io.IOUtils;
 import org.jetbrains.annotations.NotNull;
@@ -22,9 +23,9 @@ public class BitBucketIssueFetcher extends AbstractIssueFetcher {
   @NotNull
   private final IssueParser myParser;
 
-  public BitBucketIssueFetcher(@NotNull final EhCacheHelper cacheHelper,
+  public BitBucketIssueFetcher(@NotNull final EhCacheUtil cacheUtil,
                                @NotNull final IssueParser parser) {
-    super(cacheHelper);
+    super(cacheUtil);
     myParser = parser;
   }
 
