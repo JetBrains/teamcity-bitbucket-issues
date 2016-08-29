@@ -4,13 +4,10 @@
     <name>TeamCity.BitBucketIssues</name>
     <display-name>TeamCity.BitBucketIssues</display-name>
     <version>@Version@</version>
-    <description>Plugin description</description>
-    <download-url>Plugin download URL</download-url>
-    <email>Plugin author e-mail</email>
+    <description>Bitbucket issue tracker integration</description>
     <vendor>
       <name>@VendorName@</name>
       <url>@VendorURL@</url>
-      <logo>Plugin vendor logo URL</logo>
     </vendor>
   </info>
   <deployment use-separate-classloader="true" />
