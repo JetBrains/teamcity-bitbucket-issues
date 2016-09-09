@@ -17,12 +17,12 @@
     <c:otherwise> ${numSuggestedTrackers} </c:otherwise>
   </c:choose>
   VCS root<bs:s val="${numSuggestedTrackers}"/> in the project <admin:editProjectLink projectId="${project.externalId}"><c:out value="${project.fullName}"/></admin:editProjectLink>
-  that point<c:if test="${numSuggestedTrackers == 1}">s</c:if> to Bitbucket Cloud. Do you want to use Bitbucket issue tracker<bs:s val="${numSuggestedTrackers}"/> as well?
+  pointing to Bitbucket Cloud. You can connect TeamCity to Bitbucket Cloud issue tracker<bs:s val="${numSuggestedTrackers}"/>.
   <c:forEach var="itemEntry" items="${suggestedTrackers}">
     <c:set var="item" value="${itemEntry.value}"/>
     <div class="suggestionAction">
       <c:url var="url" value="/admin/editProject.html?init=1&projectId=${project.externalId}&tab=issueTrackers&#addTracker=${item['type']}&repoUrl=${util:urlEscape(item['repoUrl'])}&suggestedName=${util:urlEscape(item['suggestedName'])}"/>
-      <a class="addNew" href="${url}">Use Bitbucket issue tracker for ${item['suggestedName']}</a>
+      <a class="tc-icon_before icon16 addNew" href="${url}">Add connection for ${item['suggestedName']}</a>
     </div>
   </c:forEach>
 </div>
