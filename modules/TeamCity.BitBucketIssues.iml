@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../TeamCity.BitBucketIssues-server">
+      <sourceFolder url="file://$MODULE_DIR$/../TeamCity.BitBucketIssues-server/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../TeamCity.BitBucketIssues-server/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../TeamCity.BitBucketIssues-server/src/test/java" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/../TeamCity.BitBucketIssues-server/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="server-model" />
+    <orderEntry type="module" module-name="common" />
+    <orderEntry type="library" name="commons-httpclient" level="project" />
+    <orderEntry type="module" module-name="web-openapi" />
+    <orderEntry type="library" name="EhCache" level="project" />
+    <orderEntry type="library" name="commons-collections" level="project" />
+    <orderEntry type="library" name="xmlrpc-2.0" level="project" />
+    <orderEntry type="module" module-name="issue-tracker-common" />
+    <orderEntry type="module" module-name="oauth-integration" />
+    <orderEntry type="module" module-name="oauth-integration-web" />
+    <orderEntry type="module" module-name="test-api" scope="TEST" />
+    <orderEntry type="library" name="commons-io" level="project" />
+    <orderEntry type="library" name="jackson" level="project" />
+  </component>
+</module>

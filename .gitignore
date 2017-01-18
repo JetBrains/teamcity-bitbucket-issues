@@ -12,7 +12,6 @@ buildNumber.properties
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio
 
-*.iml
 
 ## Directory-based project format:
 .idea/
@@ -44,8 +43,8 @@ buildNumber.properties
 ## Plugin-specific files:
 
 # Modules that are generated from maven
-TeamCity.GitHubIssues.iml
-TeamCity.GitHubIssues-server/TeamCity.GitHubIssues-server.iml
+./TeamCity.BitBucketIssues.iml
+./TeamCity.BitBucketIssues-server/TeamCity.BitBucketIssues-server.iml
 #build/build.iml
 
 # IntelliJ
