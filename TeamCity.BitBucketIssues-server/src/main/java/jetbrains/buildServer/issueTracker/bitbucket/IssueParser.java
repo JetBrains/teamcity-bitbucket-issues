@@ -21,10 +21,10 @@ public class IssueParser {
     try {
       return doParse(new ObjectMapper().readValue(issueAsString, Map.class));
     } catch (Exception e) {
-      LOG.error("Could not parse issue json from BitBucket. Error message is: " + e.getMessage());
+      LOG.error("Could not parse issue json from Bitbucket. Error message is: " + e.getMessage());
       if (LOG.isDebugEnabled()) {
         LOG.debug(
-                "Could not parse issue json from BitBucket. Response (cut to first 100 symbols): ["
+                "Could not parse issue json from Bitbucket. Response (cut to first 100 symbols): ["
                 + issueAsString.substring(Math.min(100, issueAsString.length() - 1))
                 + "]");
       }
