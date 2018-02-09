@@ -36,7 +36,7 @@ public class BitBucketIssueFetcherTest extends BaseTestCase {
             EventDispatcher.create(BuildServerListener.class),
             new ResetCacheRegisterImpl());
 
-    myFetcher = new BitBucketIssueFetcher(helper, myParser);
+    myFetcher = new BitBucketIssueFetcher(helper, myParser, () -> null);
     myFetcher.setPattern(Pattern.compile("#(\\d+)"));
   }
 

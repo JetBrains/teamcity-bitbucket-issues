@@ -1,7 +1,12 @@
 package jetbrains.buildServer.issueTracker.bitbucket;
 
+import java.security.KeyStore;
+import jetbrains.buildServer.http.SimpleCredentials;
 import jetbrains.buildServer.issueTracker.AbstractIssueFetcher;
+import jetbrains.buildServer.issueTracker.BasicIssueFetcherAuthenticator;
 import jetbrains.buildServer.issueTracker.IssueData;
+import jetbrains.buildServer.issueTracker.IssueFetcherUtil;
+import jetbrains.buildServer.serverSide.impl.ssl.SSLTrustStoreProvider;
 import jetbrains.buildServer.util.cache.EhCacheHelper;
 import jetbrains.buildServer.util.cache.EhCacheUtil;
 import org.apache.commons.httpclient.Credentials;
@@ -23,10 +28,17 @@ public class BitBucketIssueFetcher extends AbstractIssueFetcher {
   @NotNull
   private final IssueParser myParser;
 
-  public BitBucketIssueFetcher(@NotNull final EhCacheUtil cacheUtil,
-                               @NotNull final IssueParser parser) {
+  @NotNull
+  private final SSLTrustStoreProvider mySslTrustStoreProvider;
+
+  public BitBucketIssueFetcher(
+    @NotNull final EhCacheUtil cacheUtil,
+    @NotNull final IssueParser parser,
+    @NotNull final SSLTrustStoreProvider sslTrustStoreProvider
+  ) {
     super(cacheUtil);
     myParser = parser;
+    mySslTrustStoreProvider = sslTrustStoreProvider;
   }
 
   @NotNull
@@ -36,7 +48,10 @@ public class BitBucketIssueFetcher extends AbstractIssueFetcher {
     final String issueId = getIssueId(id);
     final String issueURL = host + issueId;
     return getFromCacheOrFetch(issueURL, () -> {
-      InputStream body = fetchHttpFile(issueURL, credentials);
+      SimpleCredentials simpleCredentials = IssueFetcherUtil
+        .retrieveCredentials(new BasicIssueFetcherAuthenticator(credentials));
+      KeyStore trustStore = mySslTrustStoreProvider.getTrustStore();
+      InputStream body = getHttpFile(issueURL, simpleCredentials, true, trustStore);
       return myParser.parse(IOUtils.toString(body, "UTF-8"));
     });
   }
