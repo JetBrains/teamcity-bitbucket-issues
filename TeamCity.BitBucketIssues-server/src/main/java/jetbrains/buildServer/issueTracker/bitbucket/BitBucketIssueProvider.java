@@ -38,6 +38,7 @@ public class BitBucketIssueProvider extends AbstractIssueProvider {
 
   private static final Logger LOG = Loggers.ISSUE_TRACKERS;
 
+  @SuppressWarnings("WeakerAccess")
   public BitBucketIssueProvider(@NotNull String type, @NotNull IssueFetcher fetcher) {
     super(type, fetcher);
   }
@@ -67,7 +68,7 @@ public class BitBucketIssueProvider extends AbstractIssueProvider {
   @Nullable
   private String getAPIUrl(@NotNull final URL htmlUrl, @NotNull final String owner, @NotNull final String repo) {
     try {
-      return new URL("https", "api." + htmlUrl.getHost(), "/1.0/repositories/" + owner + "/" + repo + "/issues/").toString();
+      return new URL("https", "api." + htmlUrl.getHost(), "/2.0/repositories/" + owner + "/" + repo + "/issues/").toString();
     } catch (MalformedURLException e) {
       LOG.warn(e);
     }
@@ -133,7 +134,6 @@ public class BitBucketIssueProvider extends AbstractIssueProvider {
         if (checkNotEmptyParam(result, map, PARAM_PATTERN, "Issue pattern must not be empty")) {
           try {
             String patternString = map.get(PARAM_PATTERN);
-            //noinspection ResultOfMethodCallIgnored
             Pattern.compile(patternString);
           } catch (PatternSyntaxException e) {
             result.add(new InvalidProperty(PARAM_PATTERN, "Syntax of issue pattern is not correct"));

@@ -73,8 +73,9 @@ public class BitBucketIssueProviderTest extends BaseTestCase {
     return result;
   }
 
+  @SuppressWarnings("SameParameterValue")
   private String getExpectedFetchHost(String owner, String repo) {
-    return "https://api.bitbucket.org/1.0/repositories/" + owner + "/" + repo + "/issues/";
+    return "https://api.bitbucket.org/2.0/repositories/" + owner + "/" + repo + "/issues/";
   }
 
   private String getActualFetchHost() throws Exception {
