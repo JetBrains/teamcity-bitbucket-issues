@@ -1,23 +1,79 @@
 {
-  "status": "in progress",
   "priority": "major",
-  "title": "Very nasty bug",
-  "reported_by": {
-    "username": "customer"
+  "kind": "bug",
+  "repository": {
+    "links": {
+      "self": {
+        "href": "https://api.bitbucket.org/2.0/repositories/atlassianlabs/stash-java-client"
+      },
+      "html": {
+        "href": "https://bitbucket.org/atlassianlabs/stash-java-client"
+      },
+      "avatar": {
+        "href": "https://bytebucket.org/ravatar/%7Be71f38a9-d9c4-4f3e-8855-682b6b6a511f%7D?ts=default"
+      }
+    },
+    "type": "repository",
+    "name": "stash-java-client",
+    "full_name": "atlassianlabs/stash-java-client",
+    "uuid": "{e71f38a9-d9c4-4f3e-8855-682b6b6a511f}"
   },
-  "utc_last_updated": "2014-04-02 14:58:40+00:00",
-  "responsible": {
-    "username": "orybak"
+  "links": {
+    "attachments": {
+      "href": "https://api.bitbucket.org/2.0/repositories/atlassianlabs/stash-java-client/issues/4/attachments"
+    },
+    "self": {
+      "href": "https://api.bitbucket.org/2.0/repositories/atlassianlabs/stash-java-client/issues/4"
+    },
+    "watch": {
+      "href": "https://api.bitbucket.org/2.0/repositories/atlassianlabs/stash-java-client/issues/4/watch"
+    },
+    "comments": {
+      "href": "https://api.bitbucket.org/2.0/repositories/atlassianlabs/stash-java-client/issues/4/comments"
+    },
+    "html": {
+      "href": "https://bitbucket.org/atlassianlabs/stash-java-client/issues/4/add-how-to-use-section"
+    },
+    "vote": {
+      "href": "https://api.bitbucket.org/2.0/repositories/atlassianlabs/stash-java-client/issues/4/vote"
+    }
   },
-  "created_on": "2014-03-25T15:51:43.963",
-  "metadata": {
-    "kind": "bug"
+  "reporter": {
+    "username": "czawadka-atlassian",
+    "display_name": "Cezary Zawadka",
+    "account_id": "557057:9de1c72e-3e46-415a-b22e-6fe32f624c0b",
+    "links": {
+      "self": {
+        "href": "https://api.bitbucket.org/2.0/users/czawadka-atlassian"
+      },
+      "html": {
+        "href": "https://bitbucket.org/czawadka-atlassian/"
+      },
+      "avatar": {
+        "href": "https://bitbucket.org/account/czawadka-atlassian/avatar/"
+      }
+    },
+    "nickname": "czawadka-atlassian",
+    "type": "user",
+    "uuid": "{2e720d55-44f9-41ec-899e-f163d60fce58}"
   },
-  "content": "This bug pisses me off",
-  "comment_count": 1,
-  "local_id": 1,
-  "follower_count": 1,
-  "utc_created_on": "2014-03-25 14:51:43+00:00",
-  "resource_uri": "/1.0/repositories/owner/repo/issues/1",
-  "is_spam": false
+  "title": "Add \"How to use\" section",
+  "component": null,
+  "votes": 3,
+  "watches": 4,
+  "content": {
+    "raw": "Readme is missing How to use section. Example with Application Links usage should be provided.",
+    "markup": "markdown",
+    "html": "<p>Readme is missing How to use section. Example with Application Links usage should be provided.</p>",
+    "type": "rendered"
+  },
+  "assignee": null,
+  "state": "open",
+  "version": null,
+  "edited_on": null,
+  "created_on": "2014-04-13T21:52:36.933293+00:00",
+  "milestone": null,
+  "updated_on": "2017-11-19T18:01:55.383065+00:00",
+  "type": "issue",
+  "id": 4
 }

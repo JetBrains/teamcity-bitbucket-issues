@@ -17,7 +17,8 @@ public class IssueParser {
 
   private static final Logger LOG = Logger.getInstance(IssueParser.class.getName());
 
-  public IssueData parse(@NotNull final String issueAsString) throws Exception {
+  @SuppressWarnings("WeakerAccess")
+  public IssueData parse(@NotNull final String issueAsString) {
     try {
       return doParse(new ObjectMapper().readValue(issueAsString, Map.class));
     } catch (Exception e) {
@@ -33,10 +34,10 @@ public class IssueParser {
   }
 
   private IssueData doParse(@NotNull final Map map) {
-    final String state = String.valueOf(map.get("status"));
-    final String type = String.valueOf(((Map)map.get("metadata")).get("kind"));
+    final String state = String.valueOf(map.get("state"));
+    final String type = String.valueOf(map.get("kind"));
     return new IssueData(
-            String.valueOf(map.get("local_id")),
+            String.valueOf(map.get("id")),
             CollectionsUtil.asMap(
                     IssueData.SUMMARY_FIELD, String.valueOf(map.get("title")),
                     IssueData.STATE_FIELD, state,

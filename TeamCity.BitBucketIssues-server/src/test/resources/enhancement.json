@@ -1,0 +1,79 @@
+{
+  "assignee": null,
+  "component": null,
+  "content": {
+    "html": "<p>Applinks implementation causes<br />\n2014-04-03 11:30:14,933 WARN  [qtp1774088918-253 ] org.apache.commons.httpclient.HttpMethodBase HttpMethodBase-getResponseBody - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.</p>\n<p>HttpExecutors should use input stream instead of String</p>",
+    "markup": "markdown",
+    "raw": "Applinks implementation causes\r\n2014-04-03 11:30:14,933 WARN  [qtp1774088918-253 ] org.apache.commons.httpclient.HttpMethodBase HttpMethodBase-getResponseBody - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.\r\n\r\nHttpExecutors should use input stream instead of String",
+    "type": "rendered"
+  },
+  "created_on": "2014-04-04T09:19:55.885802+00:00",
+  "edited_on": null,
+  "id": 2,
+  "kind": "enhancement",
+  "links": {
+    "attachments": {
+      "href": "https://api.bitbucket.org/2.0/repositories/atlassianlabs/stash-java-client/issues/2/attachments"
+    },
+    "comments": {
+      "href": "https://api.bitbucket.org/2.0/repositories/atlassianlabs/stash-java-client/issues/2/comments"
+    },
+    "html": {
+      "href": "https://bitbucket.org/atlassianlabs/stash-java-client/issues/2/suppress-warn-due-to"
+    },
+    "self": {
+      "href": "https://api.bitbucket.org/2.0/repositories/atlassianlabs/stash-java-client/issues/2"
+    },
+    "vote": {
+      "href": "https://api.bitbucket.org/2.0/repositories/atlassianlabs/stash-java-client/issues/2/vote"
+    },
+    "watch": {
+      "href": "https://api.bitbucket.org/2.0/repositories/atlassianlabs/stash-java-client/issues/2/watch"
+    }
+  },
+  "milestone": null,
+  "priority": "major",
+  "reporter": {
+    "account_id": "557057:9de1c72e-3e46-415a-b22e-6fe32f624c0b",
+    "display_name": "Cezary Zawadka",
+    "links": {
+      "avatar": {
+        "href": "https://bitbucket.org/account/czawadka-atlassian/avatar/"
+      },
+      "html": {
+        "href": "https://bitbucket.org/czawadka-atlassian/"
+      },
+      "self": {
+        "href": "https://api.bitbucket.org/2.0/users/czawadka-atlassian"
+      }
+    },
+    "nickname": "czawadka-atlassian",
+    "type": "user",
+    "username": "czawadka-atlassian",
+    "uuid": "{2e720d55-44f9-41ec-899e-f163d60fce58}"
+  },
+  "repository": {
+    "full_name": "atlassianlabs/stash-java-client",
+    "links": {
+      "avatar": {
+        "href": "https://bytebucket.org/ravatar/%7Be71f38a9-d9c4-4f3e-8855-682b6b6a511f%7D?ts=default"
+      },
+      "html": {
+        "href": "https://bitbucket.org/atlassianlabs/stash-java-client"
+      },
+      "self": {
+        "href": "https://api.bitbucket.org/2.0/repositories/atlassianlabs/stash-java-client"
+      }
+    },
+    "name": "stash-java-client",
+    "type": "repository",
+    "uuid": "{e71f38a9-d9c4-4f3e-8855-682b6b6a511f}"
+  },
+  "state": "resolved",
+  "title": "Suppress WARN due to getResponseBodyAsStream()",
+  "type": "issue",
+  "updated_on": "2017-11-19T18:01:55.238832+00:00",
+  "version": null,
+  "votes": 0,
+  "watches": 1
+}

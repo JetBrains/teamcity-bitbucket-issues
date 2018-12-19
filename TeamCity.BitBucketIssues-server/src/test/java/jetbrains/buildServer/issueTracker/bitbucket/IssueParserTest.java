@@ -8,9 +8,7 @@ import org.testng.annotations.Test;
 
 import java.nio.charset.Charset;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,7 +20,7 @@ public class IssueParserTest {
   private IssueParser myParser;
 
   @BeforeMethod
-  public void setUp() throws Exception {
+  public void setUp() {
     myParser = new IssueParser();
   }
 
@@ -30,14 +28,23 @@ public class IssueParserTest {
   public void testParseValid_Bug() throws Exception {
     final IssueData data = myParser.parse(readTestData("bug.json"));
     assertNotNull(data);
-    assertEquals("1", data.getId());
-    assertEquals("bug", data.getType());
+    assertEquals(data.getId(), "4");
+    assertEquals(data.getType(), "bug");
     assertFalse(data.isResolved());
   }
 
   @Test(expectedExceptions = RuntimeException.class)
   public void testParseInvalid() throws Exception {
     myParser.parse(readTestData("invalid.json"));
+  }
+
+  @Test
+  public void testParseEnhancement() throws Exception {
+    final IssueData data = myParser.parse(readTestData("enhancement.json"));
+    assertNotNull(data);
+    assertEquals(data.getId(), "2");
+    assertEquals(data.getType(), "enhancement");
+    assertTrue(data.isResolved());
   }
 
   private String readTestData(@NotNull final String fileName) throws Exception {
