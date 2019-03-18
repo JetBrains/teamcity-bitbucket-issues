@@ -1,6 +1,7 @@
 package jetbrains.buildServer.issueTracker.bitbucket.auth;
 
 import jetbrains.buildServer.issueTracker.IssueFetcherAuthenticator;
+import jetbrains.buildServer.util.HTTPRequestBuilder;
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
@@ -36,6 +37,10 @@ public class BitBucketAuthenticator implements IssueFetcherAuthenticator {
 
   @Override
   public void applyAuthScheme(@NotNull HttpMethod httpMethod) {
+  }
+
+  @Override
+  public void applyAuthScheme(@NotNull final HTTPRequestBuilder requestBuilder) {
   }
 
   @Nullable
