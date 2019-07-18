@@ -39,13 +39,10 @@ buildNumber.properties
 ## File-based project format:
 *.ipr
 *.iws
+*.iml
 
 ## Plugin-specific files:
 
-# Modules that are generated from maven
-./TeamCity.BitBucketIssues.iml
-./TeamCity.BitBucketIssues-server/TeamCity.BitBucketIssues-server.iml
-#build/build.iml
 
 # IntelliJ
 /out/
@@ -71,5 +68,5 @@ crashlytics-build.properties
 *.war
 *.ear
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# virtual machine crash logs, see https://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
