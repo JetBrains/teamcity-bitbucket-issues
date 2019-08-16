@@ -101,7 +101,7 @@
       <th><label for="${pattern}" class="shortLabel">Issue ID Pattern:<l:star/></label></th>
       <td>
         <props:textProperty name="${pattern}" maxlength="100"/>
-        <span class="fieldExplanation">Use the regex syntax, e.g. #(\d+)<bs:help file="Integrating+TeamCity+with+Issue+Tracker"/></span>
+        <span class="fieldExplanation">Use regex syntax, e.g. #(\d+)<bs:help file="Integrating+TeamCity+with+Issue+Tracker"/></span>
         <span id="error_${pattern}" class="error"></span>
       </td>
     </tr>
