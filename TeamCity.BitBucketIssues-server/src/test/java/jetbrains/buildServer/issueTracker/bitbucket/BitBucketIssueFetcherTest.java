@@ -46,9 +46,7 @@ public class BitBucketIssueFetcherTest extends BaseTestCase {
   @BeforeMethod
   public void setUp() throws Exception {
     super.setUp();
-    final EhCacheUtil helper = new EhCacheUtil(new ServerPaths(createTempDir().getAbsolutePath()),
-            EventDispatcher.create(BuildServerListener.class),
-            new ResetCacheRegisterImpl());
+    final EhCacheUtil helper = new EhCacheUtil(new ServerPaths(createTempDir().getAbsolutePath()), new ResetCacheRegisterImpl());
 
     myFetcher = new BitBucketIssueFetcher(helper, myParser, () -> null);
     myFetcher.setPattern(Pattern.compile("#(\\d+)"));
