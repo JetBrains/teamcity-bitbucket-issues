@@ -18,6 +18,13 @@ package jetbrains.buildServer.issueTracker.bitbucket.health;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.Pair;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import jetbrains.buildServer.issueTracker.IssueProvidersManager;
 import jetbrains.buildServer.issueTracker.bitbucket.BitBucketIssueProviderType;
 import jetbrains.buildServer.parameters.ReferencesResolverUtil;
@@ -31,15 +38,7 @@ import jetbrains.buildServer.web.openapi.PagePlaces;
 import jetbrains.buildServer.web.openapi.PluginDescriptor;
 import jetbrains.buildServer.web.openapi.healthStatus.suggestions.ProjectSuggestion;
 import org.jetbrains.annotations.NotNull;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -82,7 +81,7 @@ public class IssueTrackerSuggestion extends ProjectSuggestion {
     final List<ProjectSuggestedItem> result = new ArrayList<>();
     if (!alreadyUsed) {
       final List<SBuildType> buildTypes = project.getOwnBuildTypes();
-      List<String> paths = getPathsFromVcsRoots(buildTypes);
+      Set<String> paths = getPathsFromVcsRoots(buildTypes);
       if (paths.stream().anyMatch(ReferencesResolverUtil::mayContainReference)) {
         paths = getPathsFromInstances(buildTypes);
       }
@@ -97,22 +96,22 @@ public class IssueTrackerSuggestion extends ProjectSuggestion {
     return result;
   }
 
-  private List<String> getPathsFromVcsRoots(@NotNull final List<SBuildType> buildTypes) {
+  private Set<String> getPathsFromVcsRoots(@NotNull final List<SBuildType> buildTypes) {
     return extractFetchUrls(buildTypes.stream().map(BuildTypeSettings::getVcsRoots));
   }
 
-  private List<String> getPathsFromInstances(@NotNull final List<SBuildType> buildTypes) {
+  private Set<String> getPathsFromInstances(@NotNull final List<SBuildType> buildTypes) {
     return extractFetchUrls(buildTypes.stream().map(SBuildType::getVcsRootInstances));
   }
 
-  private List<String> extractFetchUrls(@NotNull final Stream<List<? extends VcsRoot>> stream) {
-    return stream.flatMap(it -> StreamSupport.stream(it.spliterator(), false))
+  private Set<String> extractFetchUrls(@NotNull final Stream<List<? extends VcsRoot>> stream) {
+    return stream.flatMap(List::stream)
             .map(this::getFetchUrl)
             .filter(Objects::nonNull)
-            .distinct()
-            .collect(Collectors.toList());
+            .collect(Collectors.toSet());
   }
 
+  @Nullable
   private <T extends VcsRoot> String getFetchUrl(@NotNull final T vcsRoot) {
     final String vcsName = vcsRoot.getVcsName();
     if (GIT_VCS_NAME.equals(vcsName)) {
@@ -127,6 +126,7 @@ public class IssueTrackerSuggestion extends ProjectSuggestion {
   private static final Pattern SSH_NO_PROTOCOL_PATTERN = Pattern.compile("git@bitbucket\\.org:([^/]+)/([^/]+)\\.git");
 
 
+  @Nullable
   private Pair<String, Map<String, Object>> toSuggestion(@NotNull final String fetchUrl) {
     // check for ssh with no protocol
     String suggestedName;
@@ -158,6 +158,7 @@ public class IssueTrackerSuggestion extends ProjectSuggestion {
   }
 
 
+  @NotNull
   @Override
   public String getViewUrl() {
     return myViewUrl;
