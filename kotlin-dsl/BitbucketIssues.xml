@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dsl-extension kind="projectFeature" type="IssueTracker" generateDslJar="true" applicable="params['type'] == 'BitBucketIssues'">
+    <class name="BitbucketIssueTracker">
+        <description>
+            Project feature enabling integration with Bitbucket issue tracker
+        </description>
+    </class>
+    <init>
+        <param name="type" value="BitBucketIssues" />
+        <param name="username" value="" />
+        <param name="secure:password" value="" />
+    </init>
+    <function name="bitbucketIssues">
+        <description>
+            Adds a project features enabling integration with Bitbucket issue tracker
+        </description>
+    </function>
+    <params>
+        <param name="name" dslName="displayName" mandatory="true">
+            <description>
+                Issue tracker integration display name.
+            </description>
+        </param>
+
+        <param name="repository" dslName="repositoryURL" mandatory="true">
+            <description>
+                Bitbucket server URL.
+            </description>
+        </param>
+
+        <param name="authType" type="compound">
+            <option name="anonymous" value="anonymous" />
+            <option name="usernameAndPassword" value="loginpassword">
+                <param name="username" dslName="userName" mandatory="true"/>
+                <param name="secure:password" dslName="password" mandatory="true"/>
+            </option>
+        </param>
+
+        <param name="pattern" dslName="issuesPattern">
+            <description>
+                Issues ID pattern. Use regex syntax, e.g. '#(\d+)'.
+            </description>
+        </param>
+    </params>
+</dsl-extension>
