@@ -42,4 +42,24 @@
             </description>
         </param>
     </params>
+    <examples>
+        <example>
+            <description>
+                It is not recommended to store secure values such as passwords directly in the DSL code,
+                see [Managing Tokens](https://www.jetbrains.com/help/teamcity/storing-project-settings-in-version-control.html#Managing+Tokens)
+                section of our documentation.
+            </description>
+            <code>
+                bitbucketIssues {
+                    id = "&lt;Connection ID>" // arbitrary ID, must be unique in the project
+                    displayName = "&lt;Connection display name>"
+                    repositoryURL = "&lt;Bitbucket Cloud repository URL>"
+                    authType = usernameAndPassword {
+                        userName = "&lt;Username>"
+                        password = "credentialsJSON:*****"
+                    }
+                }
+            </code>
+        </example>
+    </examples>
 </dsl-extension>
