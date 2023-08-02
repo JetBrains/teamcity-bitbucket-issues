@@ -17,9 +17,7 @@
 package jetbrains.buildServer.issueTracker.bitbucket;
 
 import com.intellij.openapi.diagnostic.Logger;
-import jetbrains.buildServer.issueTracker.AbstractIssueProvider;
-import jetbrains.buildServer.issueTracker.IssueFetcher;
-import jetbrains.buildServer.issueTracker.IssueFetcherAuthenticator;
+import jetbrains.buildServer.issueTracker.*;
 import jetbrains.buildServer.issueTracker.bitbucket.auth.BitBucketAuthenticator;
 import jetbrains.buildServer.log.Loggers;
 import jetbrains.buildServer.serverSide.InvalidProperty;
@@ -46,7 +44,7 @@ import static jetbrains.buildServer.issueTracker.bitbucket.BitBucketConstants.*;
  *
  * @author Oleg Rybak (oleg.rybak@jetbrains.com)
  */
-public class BitBucketIssueProvider extends AbstractIssueProvider {
+public class BitBucketIssueProvider extends AbstractPatternBasedIssueProvider {
 
   private static final Pattern FULL_HOST_PATTERN = Pattern.compile("^https://(.+)/([^/]+)/([^/]+)/?$");
 
@@ -117,12 +115,7 @@ public class BitBucketIssueProvider extends AbstractIssueProvider {
   @NotNull
   @Override
   protected String extractId(@NotNull final String match) {
-    Matcher m = myPattern.matcher(match);
-    if (m.find() && m.groupCount() >= 1) {
-      return m.group(1);
-    } else {
-      return super.extractId(match);
-    }
+    return super.extractId(match);
   }
 
   @Override

@@ -16,6 +16,7 @@
 
 package jetbrains.buildServer.issueTracker.bitbucket;
 
+import java.util.HashMap;
 import jetbrains.buildServer.BaseTestCase;
 import jetbrains.buildServer.web.openapi.PluginDescriptor;
 import org.jetbrains.annotations.NotNull;
@@ -81,6 +82,19 @@ public class BitBucketIssueProviderTest extends BaseTestCase {
     myProvider.setProperties(getProperties("https://bitbucket.org/owner/repo"));
     assertEquals("https://bitbucket.org/owner/repo/", myProvider.getProperties().get("host"));
     assertEquals(getExpectedFetchHost(owner, repo), getActualFetchHost());
+  }
+
+  @Test
+  public void testOnlyEvenIds() throws Exception {
+    final Map<String, String> result = new HashMap<>(myType.getDefaultProperties());
+    result.put(BitBucketConstants.PARAM_REPOSITORY, "https://bitbucketcloud.com/owner/repo");
+    result.put(BitBucketConstants.PARAM_PATTERN, "(\\d*[02468])");
+    myProvider.setProperties(result);
+    assertEquals("2", myProvider.extractId("#2"));
+    assertEquals("20", myProvider.extractId("#20"));
+    assertEquals("446", myProvider.extractId("#446"));
+    assertEquals("#17", myProvider.extractId("#17"));
+    assertEquals("18", myProvider.extractId("#18"));
   }
 
   private Map<String, String> getProperties(@NotNull final String repo) {
