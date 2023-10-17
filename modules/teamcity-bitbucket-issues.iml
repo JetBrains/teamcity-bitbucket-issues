@@ -17,7 +17,6 @@
     <orderEntry type="module" module-name="web-openapi" />
     <orderEntry type="library" name="EhCache" level="project" />
     <orderEntry type="library" name="commons-collections" level="project" />
-    <orderEntry type="library" name="xmlrpc-2.0" level="project" />
     <orderEntry type="module" module-name="issue-tracker-common" />
     <orderEntry type="module" module-name="oauth-integration" />
     <orderEntry type="module" module-name="oauth-integration-web" />
