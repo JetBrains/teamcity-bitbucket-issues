@@ -7,10 +7,17 @@
   <artifactId>TeamCity.BitBucketIssues</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
+
   <properties>
     <teamcity-version>2019.1</teamcity-version>
     <local.repo.path>local-repo</local.repo.path>
   </properties>
+
+  <modules>
+    <module>TeamCity.BitBucketIssues-server</module>
+    <module>build</module>
+  </modules>
+
   <repositories>
     <repository>
       <id>local-teamcity-artifacts</id>
@@ -20,16 +27,29 @@
       </snapshots>
     </repository>
     <repository>
+      <id>central</id>
+      <name>Central Repository</name>
+      <url>https://repo.maven.apache.org/maven2</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <updatePolicy>daily</updatePolicy>
+      </releases>
+    </repository>
+    <repository>
       <id>jetbrains-all</id>
       <url>https://download.jetbrains.com/teamcity-repository</url>
     </repository>
   </repositories>
+
   <pluginRepositories>
     <pluginRepository>
       <id>jetbrains-all</id>
       <url>https://download.jetbrains.com/teamcity-repository</url>
     </pluginRepository>
   </pluginRepositories>
+
   <build>
     <pluginManagement>
       <plugins>
@@ -63,6 +83,7 @@
       </plugins>
     </pluginManagement>
   </build>
+
   <profiles>
     <profile>
       <id>orybak-dev</id>
@@ -93,8 +114,4 @@
       </build>
     </profile>
   </profiles>
-  <modules>
-    <module>TeamCity.BitBucketIssues-server</module>
-    <module>build</module>
-  </modules>
 </project>

@@ -1,0 +1,31 @@
+<settings>
+  <mirrors>
+    <mirror>
+      <id>central-proxy</id>
+      <url>https://repo.labs.intellij.net/central-proxy</url>
+      <mirrorOf>central</mirrorOf>
+    </mirror>
+  </mirrors>
+
+  <profiles>
+    <profile>
+      <id>use-internal-repo</id>
+      <repositories>
+        <repository>
+          <id>central</id>
+          <url>https://repo.maven.apache.org/maven2</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+
+  <activeProfiles>
+    <activeProfile>use-internal-repo</activeProfile>
+  </activeProfiles>
+</settings>
