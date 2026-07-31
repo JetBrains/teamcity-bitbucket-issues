@@ -10,7 +10,8 @@
 
   <properties>
     <teamcity-version>2019.1</teamcity-version>
-    <local.repo.path>local-repo</local.repo.path>
+    <TC_LOCAL_REPO>local-repo</TC_LOCAL_REPO>
+    <local.repo.path>${TC_LOCAL_REPO}</local.repo.path>
   </properties>
 
   <modules>
@@ -22,9 +23,6 @@
     <repository>
       <id>local-teamcity-artifacts</id>
       <url>file://${local.repo.path}</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
     </repository>
     <repository>
       <id>central</id>
